@@ -1,0 +1,8 @@
+
+body {
+	@apply bg-gray-200
+}
+
+.app-container {
+	@apply p-4 md:p-10;
+}
