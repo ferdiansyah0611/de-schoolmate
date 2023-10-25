@@ -1,8 +1,9 @@
+import styles from "../../styles/app/notes.module.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "@material-tailwind/react";
 import useNotes from "../../stores/useNotes";
-import { useNavigate } from "react-router-dom";
 import NoteItem from "../../components/note/NoteItem";
-import { useState } from "react";
 import { DialogConfirm } from "../../components/dialog/DialogConfirm";
 
 export default function Note() {
@@ -15,14 +16,17 @@ export default function Note() {
 		setOpenConfirm(!openConfirm)
 	}
 	return (
-		<main>
-			<section className="app-container flex flex-col gap-10 justify-center items-center">
-				<div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5 text-center max-w-5xl">
+		<main id="note">
+			<section className={"app-container " + styles.section_one}>
+				<div className={styles.cols}>
 					<div
 						onClick={() => navigate("/app/note/editor")}
-						className="flex justify-center items-center cursor-pointer border-2 border-gray-300 hover:border-blue-500 rounded-lg p-10 text-gray-500 hover:text-blue-500 hover:bg-blue-100 transition-all duration-300"
+						className={styles.add}
 					>
-						<Typography variant="h4">Create Note</Typography>
+						<div>
+							<span className="material-symbols-outlined">add</span>
+						</div>
+						<Typography variant="h5">Create Note</Typography>
 					</div>
 					{notes.data.map((item) => (
 						<NoteItem item={item} key={item.id} onDelete={() => {

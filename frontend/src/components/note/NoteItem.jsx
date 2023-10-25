@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Button, Card, CardBody, CardFooter, Typography } from "@material-tailwind/react"
 import { useNavigate } from "react-router-dom"
+import date from "../../utils/date"
 
 const MAX_DESCRIPTION = 200
 
@@ -16,8 +17,12 @@ export default function NoteItem({ item, onDelete }) {
 	return(
 		<Card key={item.id}>
 			<CardBody>
-				<Typography variant="paragraph">{description}</Typography>
+				<Typography variant="paragraph" style={{wordBreak: 'break-word'}}>{description}</Typography>
 			</CardBody>
+				{item.createdAt ?
+					<Typography variant="small" className="text-gray-600">{date.parseTimeToHuman(item.createdAt)}</Typography>
+					: false
+				}
 			<CardFooter className="flex gap-5 justify-center">
 				<Button className="flex items-center gap-3" size="sm" color="blue" onClick={() => navigate('/app/note/editor/' + item.id)}>
 					<span className="material-symbols-outlined">edit</span>
