@@ -6,8 +6,12 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
+import { useLocation } from "react-router-dom";
  
 export default function Navigation() {
+  const location = useLocation();
+  if (location.pathname.includes("/app")) return <></>;
+  
   const [openNav, setOpenNav] = React.useState(false);
  
   React.useEffect(() => {
