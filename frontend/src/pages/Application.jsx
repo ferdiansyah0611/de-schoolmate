@@ -9,6 +9,8 @@ export default function Application() {
 		switch(title) {
 			case "Note":
 				return navigate("/app/note");
+			case "Todo List":
+				return navigate("/app/todolist");
 		}
 	}
 	return(
