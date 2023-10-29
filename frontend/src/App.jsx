@@ -12,6 +12,7 @@ import Note from "./pages/note/Note"
 import NoteEditor from "./pages/note/NoteEditor"
 import Timer from "./pages/timer/Timer"
 import Todolist from "./pages/todolist/Todolist"
+import TodolistProject from "./pages/todolist/TodolistProject"
 import Tutorial from "./pages/tutorial/Tutorial"
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/app" element={<Application />} />
           <Route path="/app/todolist" element={<Todolist />} />
+          <Route path="/app/todolist/project/:id" element={<TodolistProject />} />
           <Route path="/app/timer" element={<Timer />} />
           <Route path="/app/note" element={<Note />} />
           <Route path="/app/note/editor" element={<NoteEditor />} />

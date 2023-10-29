@@ -8,7 +8,7 @@ import {
 	Textarea,
 } from "@material-tailwind/react";
 
-export default function TodolistDialogAdd({ open, handler, input, inputRef, inputHandler, onSubmit }) {
+export default function TodolistDialogAdd({ open, handler, input, inputHandler, onSubmit }) {
 	return (
 		<>
 			<Dialog size="md" open={open} handler={handler} className="bg-transparent shadow-none">
@@ -17,7 +17,7 @@ export default function TodolistDialogAdd({ open, handler, input, inputRef, inpu
 						<Typography variant="h4" color="blue-gray">
 							Todo List Input
 						</Typography>
-						<Textarea value={input} onChange={(e) => inputHandler(e.target.value)} ref={inputRef} label="Message" />
+						<Textarea value={input} onChange={(e) => inputHandler(e.target.value)} label="Message" />
 					</CardBody>
 					<CardFooter className="pt-0">
 						<Button

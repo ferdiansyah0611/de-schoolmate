@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
-import { Button, Card, CardBody, CardFooter, Typography } from "@material-tailwind/react"
+import { Typography } from "@material-tailwind/react"
 import { useNavigate } from "react-router-dom"
 import date from "../../utils/date"
+import ManagerCard from "../card/ManagerCard"
 
 const MAX_DESCRIPTION = 200
 
@@ -15,23 +16,16 @@ export default function NoteItem({ item, onDelete }) {
 	}, [item])
 
 	return(
-		<Card key={item.id}>
-			<CardBody>
-				<Typography variant="paragraph" style={{wordBreak: 'break-word'}}>{description}</Typography>
-			</CardBody>
-				{item.createdAt ?
+		<ManagerCard
+			description={<Typography variant="paragraph" style={{wordBreak: 'break-word'}}>{description}</Typography>}
+			onDelete={onDelete}
+			onEdit={() => navigate('/app/note/editor/' + item.id)}
+			timer={
+				item.createdAt ?
 					<Typography variant="small" className="text-gray-600">{date.parseTimeToHuman(item.createdAt)}</Typography>
-					: false
-				}
-			<CardFooter className="flex gap-5 justify-center">
-				<Button className="flex items-center gap-3" size="sm" color="blue" onClick={() => navigate('/app/note/editor/' + item.id)}>
-					<span className="material-symbols-outlined">edit</span>
-				</Button>
-				<Button className="flex items-center gap-3" size="sm" color="red" onClick={onDelete}>
-					<span className="material-symbols-outlined">delete</span>
-				</Button>
-			</CardFooter>
-		</Card>
+				: false
+			}
+		/>
 	)
 }
 

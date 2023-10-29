@@ -1,10 +1,12 @@
 import styles from "../../styles/app/notes.module.css";
+import mainStyles from "../../styles/main.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Typography } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 import useNotes from "../../stores/useNotes";
 import NoteItem from "../../components/note/NoteItem";
 import { DialogConfirm } from "../../components/dialog/DialogConfirm";
+import AddCard from "../../components/card/AddCard";
 
 export default function Note() {
 	const notes = useNotes();
@@ -16,18 +18,10 @@ export default function Note() {
 		setOpenConfirm(!openConfirm)
 	}
 	return (
-		<main id="note">
+		<main>
 			<section className={"app-container " + styles.section_one}>
-				<div className={styles.cols}>
-					<div
-						onClick={() => navigate("/app/note/editor")}
-						className={styles.add}
-					>
-						<div>
-							<span className="material-symbols-outlined">add</span>
-						</div>
-						<Typography variant="h5">Create Note</Typography>
-					</div>
+				<div className={mainStyles.cols}>
+					<AddCard onClick={() => navigate("/app/note/editor")} text="Create Note" />
 					{notes.data.map((item) => (
 						<NoteItem item={item} key={item.id} onDelete={() => {
 							setConfirmID(item.id)

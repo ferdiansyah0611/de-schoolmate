@@ -1,9 +1,10 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-const tmp = [
+const section = [
   {
     id: "section-1",
+    projectId: "task-1",
     title: "Task",
     items: [
       { id: "item-1", label: "Task 1" },
@@ -19,6 +20,7 @@ const tmp = [
   },
   {
     id: "section-2",
+    projectId: "task-1",
     title: "Progress",
     items: [
       { id: "item-40", label: "Progress 1" },
@@ -27,6 +29,7 @@ const tmp = [
   },
   {
     id: "section-3",
+    projectId: "task-1",
     title: "Done",
     items: [
       { id: "item-60", label: "Done 1" },
@@ -35,21 +38,77 @@ const tmp = [
     ],
   },
 ];
+
+const project = [
+  {
+    id: "task-1",
+    title: 'Create Real Estate Application',
+  },
+  {
+    id: "task-2",
+    title: 'Create SAAS Application',
+  },
+];
+
 const useTodolist = create((set) => ({
-  data: tmp,
-  push: (nextGroup, value) => set((state) => {
-    const updatedSections = state.data.map((section) => {
-      if (section.title === nextGroup) {
+  project,
+  section,
+  /**
+   * project
+   */
+  pushProject: (title) => set((state) => ({
+    project: [
+      {
+        title,
+        id: crypto.randomUUID(),
+        sections: []
+      },
+      ...state.project
+    ]
+  })),
+  deleteProject: (projectId) => set((state) => ({
+    project: state.project.filter((project) => project.id !== projectId)
+  })),
+  /**
+   * section
+   */
+  pushSection: (projectId, title) => set((state) => ({
+    section: [
+      {
+        id: crypto.randomUUID(),
+        title, projectId,
+        items: [{ id: crypto.randomUUID(), label: "Task" }]
+      },
+      ...state.section
+    ]
+  })),
+  updateSection: (projectId, sectionId, value) => set((state) => ({
+    section: state.section.map(section => {
+      if (projectId === section.projectId && sectionId === section.id) {
+        if (value.title) section.title = value.title;
+      }
+      return section;
+    })
+  })),
+  deleteSection: (projectId, sectionId) => set((state) => ({
+    section: state.section.filter(section => section.projectId === projectId && section.id !== sectionId)
+  })),
+  /**
+   * items of section
+   */
+  pushItems: (projectId, nextGroup, value) => set((state) => {
+    const updatedSections = state.section.map((section) => {
+      if (section.projectId === projectId && section.id === nextGroup) {
         section.items = [ { id: crypto.randomUUID(), label: value } , ...section.items ];
       }
       return section
     });
-    return { data: updatedSections };
+    return { section: updatedSections };
   }),
-  update: (sectionId, id, value) =>
+  updateItems: (projectId, sectionId, id, value) =>
     set((state) => ({
-      data: state.data.map((section) => {
-        if (section.id === sectionId) {
+      section: state.section.map((section) => {
+        if (section.projectId === projectId && section.id === sectionId) {
           section.items = section.items.map((item) => {
             if (item.id === id) {
               item.label = value;
@@ -60,17 +119,17 @@ const useTodolist = create((set) => ({
         return section;
       }),
     })),
-  delete: (sectionId, id) => set((state) => {
-    const updatedSections = state.data.map((section) => {
-      if (section.id === sectionId) {
+  deleteItems: (projectId, sectionId, id) => set((state) => {
+    const updatedSections = state.section.map((section) => {
+      if (section.projectId === projectId && section.id === sectionId) {
         section.items = section.items.filter((item) => item.id !== id);
       }
       return section;
     })
-    return { data: updatedSections };
+    return { section: updatedSections };
   }),
-  clear: () => set({ bears: [] }),
-  setValue: (value) => set({ data: value }),
+
+  setSection: (value) => set({ section: value }),
 }));
 
 export default useTodolist;

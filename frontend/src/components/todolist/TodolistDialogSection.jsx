@@ -5,7 +5,6 @@ import {
 	CardBody,
 	CardFooter,
 	Typography,
-	Textarea,
     Input,
 } from "@material-tailwind/react";
 

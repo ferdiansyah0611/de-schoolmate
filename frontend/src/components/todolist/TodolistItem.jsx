@@ -2,16 +2,11 @@ import { Button, Collapse } from "@material-tailwind/react";
 import styles from "../../styles/app/todolist.module.css";
 import { Draggable } from 'react-beautiful-dnd';
 import { useState } from "react";
-import useTodolist from "../../stores/useTodolist";
 
-export default function TodolistItem({ item, index, sectionId, editable }) {
+export default function TodolistItem({ item, index, sectionId, editable, doDeleteItemSection }) {
 	const [open, setOpen] = useState(false);
-	const todolist = useTodolist();
 	const toggleOpen = () => setOpen((current) => !current);
 
-	function deletion() {
-		todolist.delete(sectionId, item.id);
-	}
 	return(
 		<>
 			<Draggable key={item.id} draggableId={item.id} index={index}>
@@ -33,7 +28,7 @@ export default function TodolistItem({ item, index, sectionId, editable }) {
 				}}>
 					<span className="material-symbols-outlined">edit</span>
 				</Button>
-				<Button className="flex items-center gap-3" size="sm" color="red" onClick={deletion}>
+				<Button className="flex items-center gap-3" size="sm" color="red" onClick={() => doDeleteItemSection(sectionId, item.id)}>
 					<span className="material-symbols-outlined">delete</span>
 				</Button>
 			</Collapse>

@@ -19,6 +19,10 @@
 .section .root_items {
 	flex-basis: 100%;
 }
+.section .root_items > div {
+	width: 100%;
+	height: 100%;
+}
 .section .item {
 	@apply border border-gray-300 p-2 my-2 rounded-xl flex relative;
 }
