@@ -21,13 +21,13 @@ export default function Book() {
 	}
 	return (
 		<main>
-			<section className="min-h-screen flex justify-center items-center flex-col">
-				<div className="max-w-xl">
-					<div className="p-4 bg-gray-300 rounded-md shadow-md">
-						<Typography variant="h2">Search Book Information</Typography>
-						<div className="flex gap-2 mt-4">
-							<Input value={input} onChange={(e) => setInput(e.target.value)} className="flex-1" label="Type Here" />
-							<Button onClick={submit} size="sm" disabled={!input.length}>
+			<section className="screen-center">
+				<div className="max-w-xl w-4/5">
+					<div className="app-card-filter">
+						<h2>Search Book Information</h2>
+						<div>
+							<Input color="indigo" value={input} onChange={(e) => setInput(e.target.value)} className="flex-1" label="Type Here" />
+							<Button onClick={submit} size="sm" color="indigo" disabled={!input.length}>
 								<span className="material-symbols-outlined text-sm">arrow_forward_ios</span>
 							</Button>
 						</div>
