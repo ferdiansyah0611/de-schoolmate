@@ -1,11 +1,10 @@
-import { Button, Tooltip, Typography } from "@material-tailwind/react";
+import { Tooltip, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import application from "../data/application";
 import { useEffect, useState } from "react";
 
 export default function Application() {
 	const navigate = useNavigate();
-
 	useEffect(() => {
 		document.body.classList.add("app");
 		return () => {
@@ -33,12 +32,6 @@ export default function Application() {
 								</Tooltip>
 							))}
 						</div>
-					</div>
-					<div className="mt-4 flex justify-center">
-						<Button size="sm" className="flex items-center gap-3" onClick={() => navigate("/")} color="blue">
-							<span className="material-symbols-outlined">arrow_back_ios</span>
-							Back to Home
-						</Button>
 					</div>
 					<div className="text-white text-center text-gray-500 mt-4">
 						<p>&copy; 2023 Ferdiansyah</p>

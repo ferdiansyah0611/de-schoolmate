@@ -1,0 +1,22 @@
+
+.row {
+	@apply grid sm:grid-cols-6 md:grid-cols-3 lg:grid-cols-6 gap-5;
+}
+.row > div {
+	@apply bg-[#00000057] border border-gray-700 shadow-md hover:shadow-xl cursor-pointer text-gray-400 rounded-xl;
+	@apply transition-all duration-300;
+	backdrop-filter: blur(16px) saturate(150%);
+}
+.row > div:nth-child(1) {
+	@apply flex items-center justify-center;
+}
+.row > div:not(:first-child) {
+	@apply text-center hover:bg-[#000000a1];
+}
+
+.menu_action {
+	@apply absolute right-2 top-2;
+}
+.root_icon {
+	@apply p-2 py-4 mt-2 flex justify-center;
+}

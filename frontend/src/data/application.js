@@ -45,6 +45,12 @@ const application = [
 		"travel_explore",
 		"/app/tutorial"
 	),
+	compact(
+		"Bookmark",
+		`Save your link in bookmarks`,
+		"bookmarks",
+		"/app/bookmark"
+	)
 ];
 
 function compact(title, description, icon, url) {
