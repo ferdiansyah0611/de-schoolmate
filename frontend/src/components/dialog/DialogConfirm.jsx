@@ -6,7 +6,7 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
  
-export function DialogConfirm({ open, handler, title, description, onConfirm }) {
+export default function DialogConfirm({ open, handler, title, description, onConfirm }) {
  
   return (
     <>

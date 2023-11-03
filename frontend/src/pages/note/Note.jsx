@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 import useNotes from "../../stores/useNotes";
 import NoteItem from "../../components/note/NoteItem";
-import { DialogConfirm } from "../../components/dialog/DialogConfirm";
+import DialogConfirm from "../../components/dialog/DialogConfirm";
 import AddCard from "../../components/card/AddCard";
 
 export default function Note() {

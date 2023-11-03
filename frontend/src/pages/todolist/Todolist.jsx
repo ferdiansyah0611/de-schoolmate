@@ -3,7 +3,7 @@ import mainStyles from "../../styles/main.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Typography } from "@material-tailwind/react";
-import { DialogConfirm } from "../../components/dialog/DialogConfirm";
+import DialogConfirm from "../../components/dialog/DialogConfirm";
 import useTodolist from "../../stores/useTodolist";
 import AddCard from "../../components/card/AddCard";
 import ManagerCard from "../../components/card/ManagerCard";
@@ -12,7 +12,7 @@ export default function Note() {
 	const todolist = useTodolist();
 	const navigate = useNavigate();
 	const [openConfirm, setOpenConfirm] = useState(false);
-	const [confirmID, setConfirmID] = useState(false);
+	const [confirmID, setConfirmID] = useState(null);
 
 	function confirmHandler() {
 		setOpenConfirm(!openConfirm)

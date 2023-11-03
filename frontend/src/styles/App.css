@@ -29,6 +29,15 @@ body.app {
 .app-card-filter > div {
   @apply flex gap-2 mt-4;
 }
+
+.app-nav {
+  @apply flex my-4 gap-2 items-center sticky top-0 z-10 bg-gray-300 rounded-xl p-2 px-4 mb-5 shadow-md;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  /*background: #ffffff2e;*/
+  background: white;
+  backdrop-filter: blur(16px) saturate(150%);
+}
 /*library*/
 .material-symbols-outlined {
   font-variation-settings:
@@ -62,5 +71,4 @@ body.app {
   background: #C33764;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #1D2671, #C33764);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #1D2671, #C33764); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 }

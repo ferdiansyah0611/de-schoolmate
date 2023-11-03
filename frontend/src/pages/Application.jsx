@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardFooter, Tooltip, Typography } from "@material-tailwind/react";
+import { Button, Tooltip, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import application from "../data/application";
 import { useEffect, useState } from "react";
@@ -12,21 +12,6 @@ export default function Application() {
 			document.body.classList.remove("app");
 		};
 	}, []);
-
-	function openAppHandler(title) {
-		switch (title) {
-			case "Note":
-				return navigate("/app/note");
-			case "Book Search":
-				return navigate("/app/book");
-			case "Tutorial Search":
-				return navigate("/app/tutorial");
-			case "Calender":
-				return navigate("/app/calender");
-			case "Todo List":
-				return navigate("/app/todolist");
-		}
-	}
 	return (
 		<main>
 			<section className="app-container">
@@ -40,7 +25,7 @@ export default function Application() {
 					<div className="grid sm:grid-cols-6 md:grid-cols-3 lg:grid-cols-4 gap-5 text-center max-w-5xl">
 						{application.map((item) => (
 							<Tooltip key={item.title} content="Click to Open">
-								<div onClick={() => openAppHandler(item.title)} className="text-white p-4 cursor-pointer border border-gray-500 rounded-md hover:border-white">
+								<div onClick={() => navigate(item.url)} className="text-white p-4 cursor-pointer border border-gray-500 rounded-md hover:border-white">
 									<span className="material-symbols-outlined text-5xl">{item.icon}</span>
 									<p>{item.title}</p>
 								</div>

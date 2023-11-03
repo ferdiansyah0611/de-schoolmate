@@ -19,5 +19,13 @@ function changeTheme(name) {
   })
   document.body.classList.add(name);
 }
+function useEffectTheme() {
+  document.body.classList.add(THEME[Math.floor(Math.random() * THEME.length)]);
+  return() => {
+    THEME.forEach((color) => {
+      document.body.classList.remove(color);
+    });
+  }
+}
 
-export { THEME, readableTheme, changeTheme };
+export { THEME, readableTheme, changeTheme, useEffectTheme };

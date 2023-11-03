@@ -1,28 +1,17 @@
-import { Button, Input, Typography } from "@material-tailwind/react";
+import { Button, Input } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { THEME, readableTheme, changeTheme } from "../../data/theme";
+import { useState } from "react";
+import ThemeInterface from "../../components/ThemeInterface";
 
 export default function Book() {
-	const navigate = useNavigate();
 	const [input, setInput] = useState('')
-
-	useEffect(() => {
-		document.body.classList.add(THEME[Math.floor(Math.random() * THEME.length)]);
-		return() => {
-			THEME.forEach((color) => {
-				document.body.classList.remove(color);
-			});
-		}
-	}, [])
-
 	function submit() {
 		window.open("https://www.google.com/search?tbm=bks&q=" + encodeURIComponent(input))
 	}
 	return (
 		<main>
 			<section className="screen-center">
-				<div className="max-w-xl w-4/5">
+				<div className="max-w-lg w-4/5">
 					<div className="app-card-filter">
 						<h2>Search Book Information</h2>
 						<div>
@@ -34,17 +23,7 @@ export default function Book() {
 					</div>
 				</div>
 			</section>
-			<div className="fixed right-10 top-10">
-				<div className="flex gap-2">
-					{THEME.map((color) => (
-						<Button style={{width: 10}} title={readableTheme(color)} onClick={() => changeTheme(color)} className={color} key={color}></Button>
-					))}
-					<Button size="sm" color="indigo" className="flex items-center gap-3" onClick={() => navigate("/app")}>
-						<span className="material-symbols-outlined">arrow_back_ios</span>
-						Back to App
-					</Button>
-				</div>
-			</div>
+			<ThemeInterface/>
 		</main>
 	)
 }
