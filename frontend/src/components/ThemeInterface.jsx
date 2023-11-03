@@ -3,7 +3,7 @@ import { THEME, changeTheme, readableTheme, useEffectTheme } from "../data/theme
 import { Button } from "@material-tailwind/react";
 import { useEffect } from "react";
 
-export default function ThemeInterface() {
+export default function ThemeInterface({lastChildren}) {
 	const navigate = useNavigate();
 	useEffect(useEffectTheme, []);
 	return(
@@ -16,6 +16,7 @@ export default function ThemeInterface() {
 					<span className="material-symbols-outlined">arrow_back_ios</span>
 					Back to App
 				</Button>
+				{lastChildren}
 			</div>
 		</div>
 	)

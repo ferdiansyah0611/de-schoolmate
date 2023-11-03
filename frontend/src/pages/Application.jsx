@@ -15,28 +15,33 @@ export default function Application() {
 	return (
 		<main>
 			<section className="app-container">
-				<div className="m-auto max-w-2xl">
+				<div className="m-auto max-w-2xl flex flex-col" style={{minHeight: '85vh'}}>
 					<div className="flex items-center text-white mb-4">
 						<Typography className="flex-1" variant="h3">
 							Welcome
 						</Typography>
 						<Clock />
 					</div>
-					<div className="grid sm:grid-cols-6 md:grid-cols-3 lg:grid-cols-4 gap-5 text-center max-w-5xl">
-						{application.map((item) => (
-							<Tooltip key={item.title} content="Click to Open">
-								<div onClick={() => navigate(item.url)} className="text-white p-4 cursor-pointer border border-gray-500 rounded-md hover:border-white">
-									<span className="material-symbols-outlined text-5xl">{item.icon}</span>
-									<p>{item.title}</p>
-								</div>
-							</Tooltip>
-						))}
+					<div className="flex-1">
+						<div className="grid sm:grid-cols-6 md:grid-cols-3 lg:grid-cols-4 gap-5 text-center max-w-5xl">
+							{application.map((item) => (
+								<Tooltip key={item.title} content="Click to Open">
+									<div onClick={() => navigate(item.url)} className="text-white p-4 cursor-pointer border border-gray-500 rounded-md hover:border-white">
+										<span className="material-symbols-outlined text-5xl">{item.icon}</span>
+										<p>{item.title}</p>
+									</div>
+								</Tooltip>
+							))}
+						</div>
 					</div>
 					<div className="mt-4 flex justify-center">
 						<Button size="sm" className="flex items-center gap-3" onClick={() => navigate("/")} color="blue">
 							<span className="material-symbols-outlined">arrow_back_ios</span>
 							Back to Home
 						</Button>
+					</div>
+					<div className="text-white text-center text-gray-500 mt-4">
+						<p>&copy; 2023 Ferdiansyah</p>
 					</div>
 				</div>
 			</section>

@@ -1,13 +1,5 @@
 const application = [
 	compact(
-		"Book Search",
-		`A book search feature on a website is a tool that allows 
-		users to search for books by various criteria such as title, 
-		author, subject, or keyword.`,
-		"book_5",
-		"/app/book"
-	),
-	compact(
 		"Calender",
 		`A calendar feature on a website is a tool that allows 
 		users to view and organize events, tasks, and other 
@@ -36,6 +28,14 @@ const application = [
 		create and manage a list of tasks or items that need to be completed.`,
 		"checklist",
 		"/app/todolist"
+	),
+	compact(
+		"Book Search",
+		`A book search feature on a website is a tool that allows 
+		users to search for books by various criteria such as title, 
+		author, subject, or keyword.`,
+		"book_5",
+		"/app/book"
 	),
 	compact(
 		"Tutorial Search",
