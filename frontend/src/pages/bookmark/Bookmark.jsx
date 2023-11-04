@@ -149,8 +149,8 @@ export default function Bookmark() {
 	}
 	return (
 		<main>
-			<section className="max-w-5xl m-auto mt-10">
-				<div className="flex mb-4">
+			<section className="max-w-5xl m-auto mt-4 md:mt-10 px-2">
+				<div className="flex mb-4 items-center">
 					<div className="flex-1">
 						<Typography color="white" variant="h4">Bookmark</Typography>
 					</div>

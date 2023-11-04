@@ -1,9 +1,10 @@
 import "./styles/App.css";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 /*components*/
 import Navigation from "./components/partials/Navigation";
 import Footer from "./components/partials/Footer";
 /*pages*/
+import Home from "./pages/Home"
 import Application from "./pages/Application"
 import Book from "./pages/book/Book"
 import Calender from "./pages/calender/Calender"
@@ -21,7 +22,7 @@ function App() {
       <BrowserRouter>
         <Navigation/>
         <Routes>
-          <Route path="/" element={<Navigate to="/app"/>} />
+          <Route path="/" element={<Home />} />
           <Route path="/app" element={<Application />} />
           <Route path="/app/todolist" element={<Todolist />} />
           <Route path="/app/todolist/project/:id" element={<TodolistProject />} />

@@ -15,13 +15,11 @@ export default function Home() {
 				</div>
 			</section>
 			<section className="app-container" id="about-us">
-				<Typography variant="h2">About Us</Typography>
-				<div>
-					<div>
-						<img src="https://images.unsplash.com/photo-1514355315815-2b64b0216b14?auto=format&fit=crop&q=60&w=600&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNvbGxlZ2UlMjBnaXJsfGVufDB8fDB8fHww" alt="photo"/>
-					</div>
-					<div>
-						<Typography>
+				<div className="flex flex-col items-center justify-center">
+					<div className="max-w-lg text-center bg-gray-100 p-4 border border-gray-300 rounded-xl">
+						<Typography variant="h2">About Us</Typography>
+						<img className="rounded-xl" src="https://images.unsplash.com/photo-1514355315815-2b64b0216b14?auto=format&fit=crop&q=60&w=600&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNvbGxlZ2UlMjBnaXJsfGVufDB8fDB8fHww" alt="photo"/>
+						<Typography className="mt-4" color="gray">
 							Our website is a powerful productivity and organization 
 							tool designed specifically for students. With a wide 
 							range of features such as a Pomodoro timer, note making, 
@@ -39,14 +37,16 @@ export default function Home() {
 					</div>
 				</div>
 			</section>
-			<section className="app-container text-center">
+			<div className="w-full border-t border-gray-300"></div>
+			<section className="app-container text-center" id="features">
 				<Typography variant="h2">Features</Typography>
 				<div className="grid grid-cols md:grid-cols-3 gap-10">
 					{application.map((item) => (
 						<Card key={item.title}>
 							<CardBody>
+								<span className="material-symbols-outlined text-5xl">{item.icon}</span>
 								<Typography variant="h5">{item.title}</Typography>
-								<Typography variant="paragraph">{item.description}</Typography>
+								<Typography variant="small" className="mt-4">{item.description}</Typography>
 							</CardBody>
 						</Card>
 					))}
