@@ -8,7 +8,7 @@
 	backdrop-filter: blur(16px) saturate(150%);
 }
 .row > div:nth-child(1) {
-	@apply flex items-center justify-center;
+	@apply flex items-center justify-center p-4;
 }
 .row > div:not(:first-child) {
 	@apply text-center hover:bg-[#000000a1];

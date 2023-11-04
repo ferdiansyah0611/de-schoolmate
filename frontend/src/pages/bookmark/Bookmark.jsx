@@ -1,5 +1,5 @@
 import style from "../../styles/app/bookmark.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import useBookmark from "../../stores/useBookmark";
 import {
 	Button,
@@ -31,6 +31,11 @@ export default function Bookmark() {
 		folderId: null,
 		title: "",
 		url: "",
+	});
+	const [dialogAddFolder, setDialogAddFolder] = useState({
+		open: false,
+		id: null,
+		name: "",
 	});
 
 	const bookmark = useBookmark();
@@ -102,6 +107,46 @@ export default function Bookmark() {
 			url: data.url,
 		});
 	}
+
+	/*folder*/
+	function toggleDialogAddFolder() {
+		setDialogAddFolder((prev) => ({
+			...prev,
+			open: !prev.open,
+		}));
+	}
+	function handlerDialogAddFolder(e) {
+		const { name, value } = e.target;
+		setDialogAddFolder((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	}
+	function resetDialogAddFolder() {
+		setDialogAddFolder({
+			open: false,
+			id: null,
+			name: "",
+		});
+	}
+	function saveFolder() {
+		// do edit
+		if (dialogAddFolder.id) {
+			bookmark.updateFolder(dialogAddFolder.id, {
+				name: dialogAddFolder.name
+			})
+		}
+		// do commit
+		else {
+			bookmark.pushFolder({
+				id: crypto.randomUUID(),
+				name: dialogAddFolder.name,
+				data: []
+			})
+		}
+
+		resetDialogAddFolder()
+	}
 	return (
 		<main>
 			<section className="max-w-5xl m-auto mt-10">
@@ -110,7 +155,7 @@ export default function Bookmark() {
 						<Typography color="white" variant="h4">Bookmark</Typography>
 					</div>
 					<div className="flex gap-2">
-						<IconButton color="deep-purple">
+						<IconButton color="deep-purple" onClick={toggleDialogAddFolder}>
 							<span className="material-symbols-outlined">add</span>
 						</IconButton>
 						<IconButton color="indigo" onClick={() => navigate("/app")}>
@@ -121,7 +166,13 @@ export default function Bookmark() {
 				<Tabs value={dialogAddBookmark.folderId || (bookmark.folder.length ? bookmark.folder[0].id : "")}>
 					<TabsHeader>
 						{bookmark.folder.map(({ name, id }) => (
-							<Tab onClick={() => updateTabActive(id)} key={id} value={id}>
+							<Tab key={id} value={id} onClick={() => updateTabActive(id)} onContextMenu={(e) => {
+								e.preventDefault();
+								setDialogAddFolder({
+									id, name,
+									open: true,
+								});
+							}}>
 								{name}
 							</Tab>
 						))}
@@ -169,7 +220,7 @@ export default function Bookmark() {
 					</TabsBody>
 				</Tabs>
 			</section>
-			{/*dialog*/}
+			{/*dialog bookmark*/}
 			<Dialog open={dialogAddBookmark.open} handler={toggleDialogAddBookmark} size="xs">
 				<DialogHeader className="border-b border-gray-300">
 					{dialogAddBookmark.id ? "Edit Bookmark" : "Add Bookmark"}
@@ -197,10 +248,35 @@ export default function Bookmark() {
 						Submit
 					</Button>
 					<Button
-						onClick={() => {
-							toggleDialogAddBookmark();
-							resetDialogAddBookmark();
-						}}
+						onClick={resetDialogAddBookmark}
+						color="red"
+					>
+						Cancel
+					</Button>
+				</DialogFooter>
+			</Dialog>
+			{/*dialog folder*/}
+			<Dialog open={dialogAddFolder.open} handler={toggleDialogAddFolder} size="xs">
+				<DialogHeader className="border-b border-gray-300">
+					{dialogAddFolder.id ? "Edit Folder" : "Add Folder"}
+				</DialogHeader>
+				<DialogBody>
+					<div className="flex flex-col items-center gap-2">
+						<Input
+							value={dialogAddFolder.name}
+							onChange={handlerDialogAddFolder}
+							type="text"
+							label="Name"
+							name="name"
+						/>
+					</div>
+				</DialogBody>
+				<DialogFooter className="gap-2">
+					<Button onClick={saveFolder} color="indigo">
+						Submit
+					</Button>
+					<Button
+						onClick={resetDialogAddFolder}
 						color="red"
 					>
 						Cancel
