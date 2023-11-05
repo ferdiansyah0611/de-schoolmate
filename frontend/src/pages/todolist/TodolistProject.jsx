@@ -6,14 +6,14 @@ import TodolistSection from "../../components/todolist/TodolistSection";
 import TodolistDialogAdd from "../../components/todolist/TodolistDialogAdd";
 import { Button, Typography } from "@material-tailwind/react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useShallow } from 'zustand/react/shallow';
+import { useShallow } from "zustand/react/shallow";
 import TodolistDialogSection from "../../components/todolist/TodolistDialogSection";
 
 export default function TodolistProject() {
 	const navigate = useNavigate();
 	const params = useParams();
 	// wrapper action state todolist
-	const todolistAction = useTodolist(state => ({
+	const todolistAction = useTodolist((state) => ({
 		pushProject: state.pushProject,
 		deleteProject: state.deleteProject,
 		pushSection: state.pushSection,
@@ -23,11 +23,13 @@ export default function TodolistProject() {
 		updateItems: state.updateItems,
 		deleteItems: state.deleteItems,
 		setSection: state.setSection,
-	}))
-	const todolist = useTodolist(useShallow((state) => ({
-		project: state.project.find(project => project.id === params.id),
-		section: state.section.filter(section => section.projectId === params.id)
-	})));
+	}));
+	const todolist = useTodolist(
+		useShallow((state) => ({
+			project: state.project.find((project) => project.id === params.id),
+			section: state.section.filter((section) => section.projectId === params.id),
+		})),
+	);
 	/**
 	 * Dialog Add Section
 	 */
@@ -55,7 +57,7 @@ export default function TodolistProject() {
 				params.id,
 				stateDialogAdd.editable.sectionId,
 				stateDialogAdd.editable.id,
-				stateDialogAdd.input
+				stateDialogAdd.input,
 			);
 			setStateDialogAdd((current) => ({
 				...current,
@@ -133,16 +135,14 @@ export default function TodolistProject() {
 	function stateDialogSectionSubmit() {
 		// do edit name
 		if (stateDialogSection.editable) {
-			todolistAction.updateSection(
-				params.id,
-				stateDialogSection.editable.sectionId,
-				{title: stateDialogSection.input}
-			)
-			setStateDialogSection((current) => ({ ...current, input: '', editable: null }));
+			todolistAction.updateSection(params.id, stateDialogSection.editable.sectionId, {
+				title: stateDialogSection.input,
+			});
+			setStateDialogSection((current) => ({ ...current, input: "", editable: null }));
 		}
 		// do commit
 		else {
-			todolistAction.pushSection(params.id, stateDialogSection.input)
+			todolistAction.pushSection(params.id, stateDialogSection.input);
 			stateDialogSectionInput("");
 		}
 	}
@@ -155,7 +155,7 @@ export default function TodolistProject() {
 		}));
 	}
 	function doDeleteSection(sectionId) {
-		todolistAction.deleteSection(params.id, sectionId)
+		todolistAction.deleteSection(params.id, sectionId);
 	}
 
 	function doDeleteItemSection(sectionId, itemId) {
@@ -174,13 +174,13 @@ export default function TodolistProject() {
 						Back to App
 					</Button>
 				</div>
-				{
-					!todolist.section.length ?
-						<div className="text-gray-500 flex justify-center items-center" style={{minHeight: '70vh'}}>
-							<Typography variant="h4">No Section Data</Typography>
-						</div>
-					: false
-				}
+				{!todolist.section.length ? (
+					<div className="text-gray-500 flex justify-center items-center" style={{ minHeight: "70vh" }}>
+						<Typography variant="h4">No Section Data</Typography>
+					</div>
+				) : (
+					false
+				)}
 				<DragDropContext onDragEnd={handleDragEnd}>
 					<div className={styles.cols}>
 						{todolist.section.map((section) => (
@@ -203,6 +203,14 @@ export default function TodolistProject() {
 				input={stateDialogAdd.input}
 				inputHandler={stateDialogAddInput}
 				onSubmit={saveTaskItems}
+				onClose={() =>
+					setStateDialogAdd({
+						open: false,
+						input: "",
+						group: "Task",
+						editable: null,
+					})
+				}
 			/>
 			<TodolistDialogSection
 				open={stateDialogSection.open}
